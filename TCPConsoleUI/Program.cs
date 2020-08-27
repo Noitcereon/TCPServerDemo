@@ -1,17 +1,14 @@
 ﻿using System;
 using TCPLib;
 
-namespace TCPConsoleUI
+namespace TCPServerUI
 {
     public class Program
     {
         static void Main(string[] args)
         {
             ServerWorker serverWorker = new ServerWorker();
-            ClientWorker clientWorker = new ClientWorker();
             serverWorker.Start();
-            //clientWorker.Start();
-
 
             Console.ReadLine();
         }
