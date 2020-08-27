@@ -10,7 +10,7 @@ namespace TCPClientUI
             ClientWorker worker = new ClientWorker();
             worker.Start();
 
-            Console.WriteLine();
+            Console.ReadLine();
         }
     }
 }

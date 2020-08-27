@@ -12,20 +12,25 @@ namespace TCPLib
         public void Start()
         {
             // Client connects to the server, which in this case is localhost on port 7.
-            TcpClient client = new TcpClient("127.0.0.1", 7);
+            TcpClient socket = new TcpClient("127.0.0.1", 7);
 
-            StreamReader sr = new StreamReader(client.GetStream());
-            StreamWriter sw = new StreamWriter(client.GetStream());
+            DoClient(socket);
+        }
 
-            string outputToServer = "This is the client speaking: hello! :p";
+        public void DoClient(TcpClient socket)
+        {
+            NetworkStream ns = socket.GetStream();
+            StreamReader sr = new StreamReader(ns);
+            StreamWriter sw = new StreamWriter(ns);
+
+            string outputToServer = "This is the client speaking. Hello! ^^";
             sw.WriteLine(outputToServer);
             sw.Flush();
 
             string inputFromServer = sr.ReadLine();
             Console.WriteLine($"Server's response: {inputFromServer}");
 
-            client.Close();
+            socket.Close();
         }
-     
     }
 }

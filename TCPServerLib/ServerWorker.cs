@@ -28,8 +28,9 @@ namespace TCPLib
 
         public void DoClient(TcpClient socket)
         {
-            StreamReader streamReader = new StreamReader(socket.GetStream());
-            StreamWriter streamWriter = new StreamWriter(socket.GetStream());
+            NetworkStream ns = socket.GetStream();
+            StreamReader streamReader = new StreamReader(ns);
+            StreamWriter streamWriter = new StreamWriter(ns);
 
             // Read text from client
             string str = streamReader.ReadLine();
