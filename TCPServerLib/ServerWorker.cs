@@ -22,19 +22,24 @@ namespace TCPLib
                 // Waits for a client to call.
                 TcpClient socket = server.AcceptTcpClient();
 
-                StreamReader streamReader = new StreamReader(socket.GetStream());
-                StreamWriter streamWriter = new StreamWriter(socket.GetStream());
-
-                // Read text from client
-                string str = streamReader.ReadLine();
-                Console.WriteLine($"Server received content: {str?.ToUpper()}");
-
-                // Write to back to the client
-                streamWriter.WriteLine(str);
-                streamWriter.Flush(); // empties buffer
-
-                socket.Close();
+                DoClient(socket);
             }
+        }
+
+        public void DoClient(TcpClient socket)
+        {
+            StreamReader streamReader = new StreamReader(socket.GetStream());
+            StreamWriter streamWriter = new StreamWriter(socket.GetStream());
+
+            // Read text from client
+            string str = streamReader.ReadLine();
+            Console.WriteLine($"Server received content: {str?.ToUpper()}");
+
+            // Write to back to the client
+            streamWriter.WriteLine(str);
+            streamWriter.Flush(); // empties buffer
+
+            socket.Close();
         }
     }
 }
