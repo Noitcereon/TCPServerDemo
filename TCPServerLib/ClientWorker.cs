@@ -18,7 +18,7 @@ namespace TCPLib
 
                 DoClient(socket);
 
-                // TODO: add a stop mechanism
+                // TODO: add a stop mechanism here
             }
         }
 
