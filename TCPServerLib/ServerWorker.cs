@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace TCPLib
@@ -26,7 +27,7 @@ namespace TCPLib
             }
         }
 
-        public void DoClient(TcpClient socket)
+        private void DoClient(TcpClient socket)
         {
             NetworkStream ns = socket.GetStream();
             StreamReader streamReader = new StreamReader(ns);
@@ -34,7 +35,9 @@ namespace TCPLib
 
             // Read text from client
             string str = streamReader.ReadLine();
+
             Console.WriteLine($"Server received content: {str?.ToUpper()}");
+            Console.WriteLine($"Word count: { HelperMethods.CountWordsInString(str) }");
 
             // Write to back to the client
             streamWriter.WriteLine(str);
