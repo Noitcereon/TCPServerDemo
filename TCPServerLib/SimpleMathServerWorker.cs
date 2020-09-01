@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TCPLib
@@ -43,14 +44,15 @@ namespace TCPLib
 
             string[] splitStr = str?.Split(' ');
             List<int> numbers = new List<int>();
+
             if (splitStr != null)
                 foreach (var item in splitStr)
                 {
-                    // Terrible solution.
-                    if(item == splitStr[0]) continue;
-
-                    numbers.Add(int.Parse(item));
-                }
+                    if (Regex.IsMatch(item, "\\d"))
+                    {
+                        numbers.Add(int.Parse(item));
+                    }
+                } 
 
             int output = 0;
             foreach (var number in numbers)
