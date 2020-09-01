@@ -12,6 +12,9 @@ namespace TCPLib
 {
     public class ServerWorker
     {
+        /// <summary>
+        /// Starts a TCP server on port 7.
+        /// </summary>
         public void Start()
         {
             // Create server
@@ -26,6 +29,29 @@ namespace TCPLib
                     // Waits for a client to call.
                     TcpClient tempSocket = server.AcceptTcpClient();
 
+                    DoClient(tempSocket);
+                });
+            }
+        }
+
+        /// <summary>
+        /// Starts a TCP server on the specified port.
+        /// </summary>
+        /// <param name="port">The specified port eg. '80'</param>
+        public void Start(int port)
+        {
+            // Create server
+            // IP of own computer, port is type of application, which in this case is an echo server, hence port 7.
+            TcpListener server = new TcpListener(IPAddress.Loopback, port); // port 7 = echo server
+            server.Start();
+            Console.WriteLine("Server ready.");
+            while (true)
+            {
+                // Waits for a client to call.
+                TcpClient tempSocket = server.AcceptTcpClient();
+
+                Task.Run(() =>
+                {
                     DoClient(tempSocket);
                 });
             }
