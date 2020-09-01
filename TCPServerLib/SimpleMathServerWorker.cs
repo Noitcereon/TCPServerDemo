@@ -22,11 +22,11 @@ namespace TCPLib
             Console.WriteLine("Server ready.");
             while (true)
             {
+                // Waits for a client to call.
+                TcpClient tempSocket = server.AcceptTcpClient();
+
                 Task.Run(() =>
                 {
-                    // Waits for a client to call.
-                    TcpClient tempSocket = server.AcceptTcpClient();
-
                     DoClient(tempSocket);
                 });
             }
@@ -56,9 +56,9 @@ namespace TCPLib
                 output += number;
             }
 
-            Console.WriteLine($"Total: {output}");
+            Console.WriteLine($"Result: {output}");
             // Write to back to the client
-            streamWriter.WriteLine($"Total: {output}");
+            streamWriter.WriteLine($"Result: {output}");
             streamWriter.Flush(); // empties buffer
 
             socket.Close();

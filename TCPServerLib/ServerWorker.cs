@@ -24,11 +24,10 @@ namespace TCPLib
             Console.WriteLine("Server ready.");
             while (true)
             {
+                // Waits for a client to call.
+                TcpClient tempSocket = server.AcceptTcpClient();
                 Task.Run(() =>
                 {
-                    // Waits for a client to call.
-                    TcpClient tempSocket = server.AcceptTcpClient();
-
                     DoClient(tempSocket);
                 });
             }

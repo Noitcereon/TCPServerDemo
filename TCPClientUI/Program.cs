@@ -7,10 +7,10 @@ namespace TCPClientUI
     {
         static void Main(string[] args)
         {
-            ClientWorker worker = new ClientWorker();
+            SimpleMathClientWorker worker = new SimpleMathClientWorker();
             worker.Start();
 
-            Console.ReadLine();
+            Console.ReadKey();
         }
     }
 }
