@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace TCPLib
 {
-    public class ServerWorker
+    public class ServerWorker : IServerWorker
     {
         /// <summary>
         /// Starts a TCP server on port 7.
         /// </summary>
-        public void Start()
+        public virtual void Start()
         {
             // Create server
             // IP of own computer, port is type of application, which in this case is an echo server, hence port 7.
@@ -38,7 +38,7 @@ namespace TCPLib
         /// Starts a TCP server on the specified port.
         /// </summary>
         /// <param name="port">The specified port eg. '80'</param>
-        public void Start(int port)
+        public virtual void Start(int port)
         {
             // Create server
             // IP of own computer, port is type of application, which in this case is an echo server, hence port 7.
@@ -57,7 +57,7 @@ namespace TCPLib
             }
         }
 
-        private void DoClient(TcpClient socket)
+        protected virtual void DoClient(TcpClient socket)
         {
             NetworkStream ns = socket.GetStream();
             StreamReader streamReader = new StreamReader(ns);
