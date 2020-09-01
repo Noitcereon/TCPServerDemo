@@ -46,6 +46,9 @@ namespace TCPLib
             if (splitStr != null)
                 foreach (var item in splitStr)
                 {
+                    // Terrible solution.
+                    if(item == splitStr[0]) continue;
+
                     numbers.Add(int.Parse(item));
                 }
 
