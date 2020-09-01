@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace TCPLib
 {
@@ -16,14 +18,16 @@ namespace TCPLib
             // IP of own computer, port is type of application, which in this case is an echo server, hence port 7.
             TcpListener server = new TcpListener(IPAddress.Loopback, 7); // port 7 = echo server
             server.Start();
-            
+            Console.WriteLine("Server ready.");
             while (true)
             {
-                Console.WriteLine("Server ready.");
-                // Waits for a client to call.
-                TcpClient socket = server.AcceptTcpClient();
+                Task.Run(() =>
+                {
+                    // Waits for a client to call.
+                    TcpClient tempSocket = server.AcceptTcpClient();
 
-                DoClient(socket);
+                    DoClient(tempSocket);
+                });
             }
         }
 
