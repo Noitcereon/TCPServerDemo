@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace TCPLib
+namespace TCPLib.Servers
 {
     public class SimpleMathServerWorker : IServerWorker
     {

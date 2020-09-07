@@ -4,12 +4,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace TCPLib
+namespace TCPLib.Servers
 {
     public class ServerMathWorker : IServerWorker
     {
@@ -53,9 +51,10 @@ namespace TCPLib
                 }
             }
 
-            var output = numbers.Sum();
+            string response = $"Result: {numbers.Sum()}";
+            Console.WriteLine($"Response: {response}");
 
-            sw.WriteLine($"Result: {output}");
+            sw.WriteLine(response);
             sw.Flush();
 
             socket.Close();

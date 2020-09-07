@@ -1,5 +1,6 @@
 ﻿using System;
 using TCPLib;
+using TCPLib.Clients;
 
 namespace TCPClientUI
 {
