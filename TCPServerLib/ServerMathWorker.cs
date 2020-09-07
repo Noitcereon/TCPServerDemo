@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -15,13 +16,16 @@ namespace TCPLib
         public void Start()
         {
             TcpListener server = new TcpListener(IPAddress.Loopback, 3002);
-
-            Task.Run(() =>
+            server.Start();
+            Console.WriteLine("Server ready.");
+            while (true)
             {
                 TcpClient tempSocket = server.AcceptTcpClient();
-                HandleClient(tempSocket);
-            });
-
+                Task.Run(() =>
+                {
+                    HandleClient(tempSocket);
+                });
+            }
         }
 
 
@@ -32,17 +36,21 @@ namespace TCPLib
             StreamReader sr = new StreamReader(ns);
 
             string clientMsg = sr.ReadLine();
-            Console.WriteLine(clientMsg);
+            Console.WriteLine($"Request: {clientMsg}");
 
             List<double> numbers = new List<double>();
             var splitStr = clientMsg?.Split(" ");
             if (splitStr == null) return;
             for (int i = 0; i < splitStr.Length; i++)
             {
-                if (splitStr[i].ToLower() != "ADD".ToLower()) break;
-                if (i == 0) continue;
-
-                numbers.Add(Convert.ToDouble(splitStr[i]));
+                if (i == 0)
+                {
+                    if (splitStr[i].ToLower() != "ADD".ToLower()) break;
+                }
+                else
+                {
+                    numbers.Add(Double.Parse(splitStr[i], new CultureInfo("da-DK")));
+                }
             }
 
             var output = numbers.Sum();

@@ -17,15 +17,10 @@ namespace TCPLib
     {
         public void Start()
         {
-            while (true)
-            {
-                // Client connects to the server, which in this case is localhost on port 7.
-                TcpClient socket = new TcpClient("127.0.0.1", 7);
+            // Client connects to the server, which in this case is localhost on port 7.
+            TcpClient socket = new TcpClient("127.0.0.1", 7);
 
-                DoClient(socket);
-
-                // TODO: add a stop mechanism here
-            }
+            DoClient(socket);
         }
 
         public void Start(int port)

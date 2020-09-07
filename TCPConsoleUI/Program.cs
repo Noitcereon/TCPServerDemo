@@ -7,7 +7,7 @@ namespace TCPServerUI
     {
         static void Main(string[] args)
         {
-            IServerWorker serverWorker = new SimpleMathServerWorker();
+            IServerWorker serverWorker = new ServerMathWorker();
             serverWorker.Start();
 
             Console.ReadLine();
