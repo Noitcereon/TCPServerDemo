@@ -7,8 +7,8 @@ namespace TCPClientUI
     {
         static void Main(string[] args)
         {
-            SimpleMathClientWorker worker = new SimpleMathClientWorker();
-            worker.Start();
+            IClientWorker worker = new ClientWorker();
+            worker.Start(3002);
 
             Console.ReadKey();
         }

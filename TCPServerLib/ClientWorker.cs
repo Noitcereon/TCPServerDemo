@@ -7,7 +7,13 @@ using System.Text;
 
 namespace TCPLib
 {
-    public class ClientWorker
+    public interface IClientWorker
+    {
+        void Start();
+        void Start(int port);
+    }
+
+    public class ClientWorker : IClientWorker
     {
         public void Start()
         {
@@ -20,6 +26,13 @@ namespace TCPLib
 
                 // TODO: add a stop mechanism here
             }
+        }
+
+        public void Start(int port)
+        {
+            TcpClient socket = new TcpClient("127.0.0.1", port);
+
+            DoClient(socket);
         }
 
         private void DoClient(TcpClient socket)

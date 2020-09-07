@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace TCPLib
 {
-    public class SimpleMathServerWorker : ServerWorker
+    public class SimpleMathServerWorker : IServerWorker
     {
         /// <summary>
         /// Starts a TCP server on port 3001.
         /// </summary>
-        public override void Start()
+        public void Start()
         {
             // Create server
-            // IP of own computer, port is type of application, which in this case is an echo server, hence port 7.
-            TcpListener server = new TcpListener(IPAddress.Loopback, 3001); // port 7 = echo server
+            // IP of own computer, port is type of application.
+            TcpListener server = new TcpListener(IPAddress.Loopback, 3001);
             server.Start();
             Console.WriteLine("Server ready.");
             while (true)
@@ -33,7 +33,7 @@ namespace TCPLib
             }
         }
 
-        protected override void DoClient(TcpClient socket)
+        protected void DoClient(TcpClient socket)
         {
             NetworkStream ns = socket.GetStream();
             StreamReader streamReader = new StreamReader(ns);

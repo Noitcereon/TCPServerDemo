@@ -9,11 +9,18 @@ using System.Threading.Tasks;
 
 namespace TCPLib
 {
-    public class SimpleMathClientWorker
+    public class SimpleMathClientWorker : IClientWorker
     {
         public void Start()
         {
             TcpClient client = new TcpClient("localhost", 3001);
+
+            DoClient(client);
+        }
+
+        public void Start(int port)
+        {
+            TcpClient client = new TcpClient("localhost", port);
 
             DoClient(client);
         }
