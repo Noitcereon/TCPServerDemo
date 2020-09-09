@@ -15,7 +15,7 @@ namespace TCPLib.Servers
         {
             TcpListener server = new TcpListener(IPAddress.Loopback, 3002);
             server.Start();
-            Console.WriteLine("Server ready.");
+            Console.WriteLine("MathServer ready.");
             while (true)
             {
                 TcpClient tempSocket = server.AcceptTcpClient();

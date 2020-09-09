@@ -19,7 +19,7 @@ namespace TCPLib.Servers
             // IP of own computer, port is type of application.
             TcpListener server = new TcpListener(IPAddress.Loopback, 3001);
             server.Start();
-            Console.WriteLine("Server ready.");
+            Console.WriteLine("SimpleMath Server ready.");
             while (true)
             {
                 // Waits for a client to call.

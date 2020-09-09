@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -14,7 +15,7 @@ namespace TCPLib.Servers
         {
             TcpListener server = new TcpListener(IPAddress.Loopback, 3003);
             server.Start();
-
+            Console.WriteLine("Datetime server ready.");
             while (true)
             {
                 TcpClient socket = server.AcceptTcpClient();
@@ -30,7 +31,9 @@ namespace TCPLib.Servers
 
             string clientMsg = sr.ReadLine();
 
-            sw.WriteLine("output");
+            DateTime output = DateTime.ParseExact(clientMsg, "yyyy-MM-dd:mm", CultureInfo.InvariantCulture);
+
+            sw.WriteLine(output);
             sw.Flush();
 
             socket.Close();
