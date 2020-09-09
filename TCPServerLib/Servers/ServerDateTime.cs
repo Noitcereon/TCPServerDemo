@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TCPLib.Servers
@@ -30,10 +31,18 @@ namespace TCPLib.Servers
             StreamWriter sw = new StreamWriter(ns);
 
             string clientMsg = sr.ReadLine();
+            Regex pattern = new Regex(@"([0-9]\d{3}|\d{2})-\d{2}-\d{2} [0-2]\d{1}:[0-5][0-9]", RegexOptions.CultureInvariant);
+            if (pattern.IsMatch(clientMsg))
+            {
+                DateTime output = DateTime.ParseExact(clientMsg, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+                sw.WriteLine($"{output.ToShortDateString()} {output.ToShortTimeString()}");
 
-            DateTime output = DateTime.ParseExact(clientMsg, "yyyy-MM-dd:mm", CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                sw.WriteLine("Unsuccessful.");
+            }
 
-            sw.WriteLine(output);
             sw.Flush();
 
             socket.Close();
