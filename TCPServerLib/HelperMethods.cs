@@ -7,7 +7,7 @@ namespace TCPLib
     public class HelperMethods
     {
         /// <summary>
-        /// Counts the number of words in a message based on space seperation.
+        /// Counts the number of words in a message based on space separation.
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>

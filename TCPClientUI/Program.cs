@@ -1,5 +1,6 @@
 ﻿using System;
 using TCPLib;
+using TCPLib.Clients;
 
 namespace TCPClientUI
 {
@@ -7,10 +8,10 @@ namespace TCPClientUI
     {
         static void Main(string[] args)
         {
-            ClientWorker worker = new ClientWorker();
-            worker.Start();
+            IClientWorker worker = new ClientWorker();
+            worker.Start(3002);
 
-            Console.ReadLine();
+            Console.ReadKey();
         }
     }
 }

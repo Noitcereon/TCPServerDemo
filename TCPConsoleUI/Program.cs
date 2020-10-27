@@ -1,5 +1,6 @@
 ﻿using System;
 using TCPLib;
+using TCPLib.Servers;
 
 namespace TCPServerUI
 {
@@ -7,7 +8,7 @@ namespace TCPServerUI
     {
         static void Main(string[] args)
         {
-            ServerWorker serverWorker = new ServerWorker();
+            IServerWorker serverWorker = new ServerDateTime();
             serverWorker.Start();
 
             Console.ReadLine();
